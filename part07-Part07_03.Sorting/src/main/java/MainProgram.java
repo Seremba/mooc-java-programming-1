@@ -16,6 +16,9 @@ public class MainProgram {
         MainProgram.swap(nums, 0, 3);
         System.out.println(Arrays.toString(nums));
 
+        int[] numbers = {8, 3, 7, 9, 1, 2, 4};
+        MainProgram.sort(numbers);
+
     }
 
     public static int smallest(int[] array) {
@@ -60,9 +63,15 @@ public class MainProgram {
 
     public static void swap(int[] array, int index1, int index2) {
         // write your code here
-            int temp = array[index1];
-            array[index1] = array[index2];
-            array[index2] = temp;
-        
+        int temp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = temp;
+
+    }
+
+    public static void sort(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            swap(array, i, indexOfSmallestFrom(array, i));
+        }
     }
 }
