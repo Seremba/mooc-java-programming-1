@@ -38,7 +38,7 @@ public class Bird {
 
     @Override
     public String toString() {
-        return this.name + "(" + this.latinName + "): " + this.count + "observations";
+        return this.name + " (" + this.latinName + "): " + this.count + " observations";
     }
 
 }
