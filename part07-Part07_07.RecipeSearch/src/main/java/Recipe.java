@@ -40,7 +40,7 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return this.name + ", cooking time:" + this.cookingTime;
+        return this.name + ", cooking time: " + this.cookingTime;
     }
 
 }
