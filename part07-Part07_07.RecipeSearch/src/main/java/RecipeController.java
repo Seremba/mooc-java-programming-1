@@ -8,67 +8,73 @@ import java.util.Scanner;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author seremba
  */
-public class RecipeController {
-    private ArrayList<Recipe> repices;
-    private ArrayList<String> ingredients; 
 
+
+public class RecipeController {
+    
+    private ArrayList<String> ingredients;
+    private ArrayList<Recipe> recipes;
+    
     public RecipeController() {
-        this.repices = new ArrayList<>();
         this.ingredients = new ArrayList<>();
+        this.recipes = new ArrayList<>();
     }
     
-    public void listRecipe(String file){
-        try(Scanner scanner = new Scanner(Paths.get(file))){
-            while(scanner.hasNextLine()){
-                String name = scanner.nextLine();
-                int cookingTime = Integer.valueOf(scanner.nextLine());
-                
-                Recipe recipe = new Recipe(name, cookingTime);
-                this.repices.add(recipe);
-                while(scanner.hasNextLine()){
-                    String ingredient = scanner.nextLine();
-                    if(ingredient.isEmpty()){
+    public void readRecipe(String fileName) {
+        try (Scanner input = new Scanner(Paths.get(fileName))) {
+            while (input.hasNextLine()) {
+                String recipeName = input.nextLine();
+                int cookingTime = Integer.valueOf(input.nextLine());
+                Recipe recipe = new Recipe(recipeName, cookingTime);
+                recipes.add(recipe);
+                while (input.hasNextLine()) {
+                    String ingredient = input.nextLine();
+                    if (ingredient.isEmpty()) {
                         break;
-                    }
-                    this.ingredients.add(ingredient);
-                }
+                    }  
+                    recipe.addIngredient(ingredient);
+                }            
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
-    public void listRecipes(){
-        
-        for(Recipe recipe: this.repices) {
+    
+    public void listRecipes() {
+        System.out.println("Recipes: ");
+        for (Recipe recipe : recipes) {
             System.out.println(recipe);
         }
     }
-    public void findRecipeByName(String name) {
-        for(Recipe recipe: this.repices) {
-            if(recipe.getName().contains(name)){
-                System.out.println(recipe);
-            }
-        }
-    }
-    public void searchByCookingTime(int maxCookingTime){
-        for(Recipe recipe: this.repices){
-            if(recipe.getCookingTime() <= maxCookingTime) {
+    
+    public void findName(String name) {
+        System.out.println("Recipes: ");
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().contains(name)) {
                 System.out.println(recipe);
             }
         }
     }
     
-    public void searchByIngredient(String ingredient){
-        for(Recipe recipe: this.repices){
-            if(recipe.getIngredients().contains(ingredient)){
+    public void findCookingTime(int maxCookingTime) {
+        System.out.println("Recipes: ");
+        for (Recipe recipe : recipes) {
+            if (recipe.getCookingTime() <= maxCookingTime) {
                 System.out.println(recipe);
             }
         }
-    }
+    }   
     
+    public void findIngredient(String ingredient) {
+        for (int i = 0; i < recipes.size(); i++) {
+            if (recipes.get(i).getIngredients().contains(ingredient)) {
+                System.out.println(recipes.get(i));
+            }
+        }
+    }
 }
+
