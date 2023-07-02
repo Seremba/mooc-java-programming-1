@@ -12,26 +12,35 @@ import java.util.ArrayList;
  */
 public class Recipe {
 
-    private int name;
-    private String cookingTime;
+    private String name;
+    private int cookingTime;
     private ArrayList<String> ingredients;
 
-    public Recipe(int name, String cookingTime) {
+    public Recipe(String name, int cookingTime) {
         this.name = name;
         this.cookingTime = cookingTime;
         this.ingredients = new ArrayList<>();
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public String getCookingTime() {
+    public int getCookingTime() {
         return cookingTime;
     }
 
     public ArrayList<String> getIngredients() {
         return ingredients;
+    }
+
+    public void addIngredient(String ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    @Override
+    public String toString() {
+        return this.name + ", cooking time:" + this.cookingTime;
     }
 
 }
