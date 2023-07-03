@@ -1,44 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author seremba
- */
 public class Bird {
 
     private String name;
-    private String latinName;
+    private String nameInLatin;
     private int count;
 
-    public Bird(String name, String latinName) {
+    public Bird(String name, String nameInLatin) {
         this.name = name;
-        this.latinName = latinName;
+        this.nameInLatin = nameInLatin;
         this.count = 0;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public String getLatinName() {
-        return latinName;
+    public String getNameInLatin() {
+        return this.nameInLatin;
     }
 
     public int getCount() {
-        return count;
+        return this.count;
     }
 
     public void observations() {
-        count++;
+        this.count++;
     }
 
     @Override
     public String toString() {
-        return this.name + " (" + this.latinName + "): " + this.count + " observations";
+        return this.name + " (" + this.nameInLatin + "): " + this.count + " observations";
     }
 
 }
