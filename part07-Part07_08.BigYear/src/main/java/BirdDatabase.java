@@ -1,45 +1,56 @@
-
 import java.util.ArrayList;
+import java.util.Scanner;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author seremba
- */
 public class BirdDatabase {
-
-    private ArrayList<Bird> database;
-
+    private ArrayList<Bird> birds;
+    private boolean foundBird;
+    
     public BirdDatabase() {
-        this.database = new ArrayList<>();
+        this.birds = new ArrayList<>();
+        this.foundBird = false;
     }
-
-    public void add(String name, String latin){
-        Bird bird = new Bird(name, latin);
-        this.database.add(bird);
+    
+    public void addBird(Scanner input) {
+        System.out.print("Name: ");
+        String birdName = input.nextLine();
+        System.out.print("Name in Latin: ");
+        String latinName = input.nextLine();
+        birds.add(new Bird(birdName, latinName));
     }
-    public void observation(String name){
-        for(Bird bird: this.database){
-            if(bird.getName().equals(name) || bird.getLatinName().equals(name)){
+    
+    public void observeBird(Scanner input) {
+        System.out.print("Bird? ");
+        String birdName = input.nextLine();
+        for (Bird bird : this.birds) {
+            if (birdName.equals(bird.getName())) {
                 bird.observations();
-            }
+                foundBird = true;
+            } 
         }
-    }
-    public void printDatabaseBird(String name){
-        for(Bird bird : this.database){
-            if(bird.getName().contains(name) || bird.getLatinName().contains(name)){
-                System.out.println(bird);
-            }
+        
+        if (!foundBird) {
+            System.out.println("Not a bird!");
         }
     }
     
-    public void printBirdsInTheDatabse(){
-        for(Bird bird: this.database){
+    public void retrieveAllBirds() {
+        for (Bird bird : this.birds) {
             System.out.println(bird);
+        }
+    }
+    
+    public void retrieveOneBird(Scanner input) {
+        System.out.print("Bird? ");
+        String birdName = input.nextLine();
+        for (Bird bird : this.birds) {
+            if (bird.getName().contains(birdName)) {
+                System.out.println(bird);
+                foundBird = true;
+            }
+        } 
+        
+        if (!foundBird) {
+            System.out.println("Not a bird!");
         }
     }
 }
